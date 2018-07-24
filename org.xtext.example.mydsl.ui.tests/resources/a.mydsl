@@ -1,0 +1,10 @@
+element a
+abstract element b {
+	element a1
+	
+	abstract element a2 {
+		
+		element a1 {}
+		element b {}
+	}
+}
