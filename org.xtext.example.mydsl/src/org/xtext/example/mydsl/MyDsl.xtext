@@ -1,0 +1,39 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+import "http://example.com/mymodel" as model
+
+Description returns model::Element:
+	subElements+=PossibleElement*;
+
+PossibleElement returns model::Wrapper:
+	Element
+;
+
+Element returns model::Wrapper:
+	element=ElementDefinition
+;
+
+ElementDefinition returns model::Element:
+	Wrapped | Wrapped2
+;
+
+Header returns model::Element:
+	(abstract?='abstract')? "element" name=ID
+;
+	
+Wrapped returns model::Element:
+	Header 
+	("{"
+		subElements+=PossibleElement*
+	"}")?;
+
+Wrapped2 returns model::Element:
+	Header2
+	("{"
+		subElements+=PossibleElement*
+	"}")?
+;
+
+Header2 returns model::Element2:
+	(abstract?='abstract')? "element2" name=ID
+;
